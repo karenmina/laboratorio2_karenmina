@@ -1,4 +1,3 @@
-:::writing{variant="document" id="62841"}
 # Laboratorio 2 – Arquitectura de Datos
 
 **Estudiante:** Karen Mina  
