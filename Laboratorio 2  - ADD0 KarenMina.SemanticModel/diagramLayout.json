@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 291.025641025641,
+        "y": 365.38461538461536
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 229,
+            "y": 613.23671837552081
+          },
+          "nodeIndex": "public catalogo",
+          "nodeLineageTag": "f17e8db8-1428-4d44-9348-921af085b39f",
+          "size": {
+            "height": 179.84615384615381,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 647.34394684243989,
+            "y": 0
+          },
+          "nodeIndex": "public clientes",
+          "nodeLineageTag": "814403b2-6657-458b-ab7b-3c9dbf81eb63",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 93.003219131729722,
+            "y": 313.86338555143482
+          },
+          "nodeIndex": "public detalle_operacion",
+          "nodeLineageTag": "642208e8-a00f-42e5-a80e-41c068bdb29f",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 445.18135485130506,
+            "y": 289.28312907360714
+          },
+          "nodeIndex": "public operaciones",
+          "nodeLineageTag": "d521292e-4bce-40b4-aac2-d75cd319106c",
+          "size": {
+            "height": 263,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 243.40981352821677,
+            "y": 25
+          },
+          "nodeIndex": "public sedes",
+          "nodeLineageTag": "6aeb6056-05a7-4b0b-8166-acab56c636b4",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 839.62277899276148,
+            "y": 566.977338437372
+          },
+          "nodeIndex": "Medidas DAX",
+          "nodeLineageTag": "d75336e2-b72a-461d-b5eb-9414c27e91bf",
+          "size": {
+            "height": 218.1025641025642,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 78,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

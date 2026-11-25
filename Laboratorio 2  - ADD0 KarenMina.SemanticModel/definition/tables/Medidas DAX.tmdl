@@ -1,0 +1,75 @@
+table 'Medidas DAX'
+	isHidden
+	lineageTag: d75336e2-b72a-461d-b5eb-9414c27e91bf
+
+	measure 'Operaciones Completadas' =
+			
+			CALCULATE(
+			    COUNTROWS('public operaciones'),
+			    'public operaciones'[estado] = "completada"
+			)
+		formatString: 0
+		isHidden
+		lineageTag: 00606baa-3341-429b-9dad-e63eeb8f612f
+
+		changedProperty = IsHidden
+
+	measure 'Total Operaciones' =
+			
+			COUNTROWS('public operaciones')
+		formatString: 0
+		isHidden
+		lineageTag: c1d7e38c-6ad0-413e-89b7-d40023913916
+
+		changedProperty = IsHidden
+
+	measure 'Importe Completado' =
+			
+			CALCULATE(
+			    [Importe Bruto],
+			    'public operaciones'[estado] = "completada"
+			)
+		isHidden
+		lineageTag: a0a66561-7930-45c5-9e28-96adece23d7c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Unidades Completadas' =
+			
+			CALCULATE(
+			    SUM('public detalle_operacion'[cantidad]),
+			    'public operaciones'[estado] = "completada"
+			)
+		formatString: 0
+		isHidden
+		lineageTag: 1a009c4e-90ef-4ea3-9855-42225c618e81
+
+		changedProperty = IsHidden
+
+	column Auxiliar
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e902a75c-c2f5-4bf6-b856-c961cd1aedad
+		summarizeBy: sum
+		sourceColumn: Auxiliar
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas DAX' = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Auxiliar = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Auxiliar", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

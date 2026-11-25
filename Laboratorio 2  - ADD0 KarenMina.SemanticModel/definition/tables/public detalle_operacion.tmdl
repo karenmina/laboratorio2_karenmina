@@ -1,0 +1,77 @@
+table 'public detalle_operacion'
+	lineageTag: 642208e8-a00f-42e5-a80e-41c068bdb29f
+
+	measure Medida
+		lineageTag: b9a51882-d88e-4c3d-bd82-2a0531c42182
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	column detalle_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f9fc3be8-f86d-4d54-93d1-bef640e88b0b
+		summarizeBy: sum
+		sourceColumn: detalle_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column operacion_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 9408cc61-de80-42a3-8606-ee44dc80fc5f
+		summarizeBy: none
+		sourceColumn: operacion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column producto_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 43f2e3ad-48d3-4ef8-9a4a-c45a9358ea80
+		summarizeBy: none
+		sourceColumn: producto_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: int64
+		formatString: 0
+		lineageTag: 8eb1aa0a-1ae9-401d-8de7-7b345e4fe95e
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column precio_unitario
+		dataType: double
+		lineageTag: b6d21b7a-90da-488d-b042-2f486ec400f3
+		summarizeBy: sum
+		sourceColumn: precio_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column descuento
+		dataType: double
+		lineageTag: 6ef5fdba-cfca-4c52-9f61-295cf61ce6c4
+		summarizeBy: sum
+		sourceColumn: descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'public detalle_operacion' = m
+		mode: import
+		source =
+				let
+				  Origen = PostgreSQL.Database("ep-dark-dust-bd04sqoq-pooler.c-8.us-east-2.aws.neon.tech", "taller"),
+				  #"Navegación 1" = Origen{[Schema = "public", Item = "detalle_operacion"]}[Data]
+				in
+				  #"Navegación 1"
+
+	annotation PBI_ResultType = Table
+

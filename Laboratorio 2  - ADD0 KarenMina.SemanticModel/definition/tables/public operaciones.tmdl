@@ -1,0 +1,90 @@
+table 'public operaciones'
+	lineageTag: d521292e-4bce-40b4-aac2-d75cd319106c
+
+	column operacion_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a43fcd9b-6be4-4203-9de0-f6d0265d9b90
+		summarizeBy: none
+		sourceColumn: operacion_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 55876935-511a-4885-b6e5-4c8cc8505f71
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sede_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c250b02-50d8-44be-bb12-69b83978c390
+		summarizeBy: none
+		sourceColumn: sede_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 45f7db66-5803-42dd-a266-f251bac6668c
+		summarizeBy: none
+		sourceColumn: fecha
+
+		variation Variation
+			isDefault
+			relationship: 908a7fad-4359-449a-bedf-b6353774d444
+			defaultHierarchy: LocalDateTable_0d8f511d-5efa-4964-9e42-eb436880cea5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 7e7e179f-510b-4508-a484-ed265b05c05b
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		lineageTag: abf51149-72ba-4e6a-9fed-c052174c15bf
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column actualizado_en
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dde4af31-2214-4f51-b638-4e1853359617
+		summarizeBy: none
+		sourceColumn: actualizado_en
+
+		variation Variation
+			isDefault
+			relationship: e5c121b5-e17b-4dbc-b3de-dabd912f3103
+			defaultHierarchy: LocalDateTable_488d13fa-31e1-469f-a787-df3110352a36.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public operaciones' = m
+		mode: import
+		source =
+				let
+				  Origen = PostgreSQL.Database("ep-dark-dust-bd04sqoq-pooler.c-8.us-east-2.aws.neon.tech", "taller"),
+				  #"Navegación 1" = Origen{[Schema = "public", Item = "operaciones"]}[Data],
+				  #"Valor reemplazado" = Table.ReplaceValue(#"Navegación 1", "anulado", "cancelada", Replacer.ReplaceText, {"estado"}),
+				  #"Valor reemplazado 1" = Table.ReplaceValue(#"Valor reemplazado", "COMPLETADA", "completada", Replacer.ReplaceText, {"estado"}),
+				  #"Valor reemplazado 2" = Table.ReplaceValue(#"Valor reemplazado 1", "PENDIENTE", "pendiente", Replacer.ReplaceText, {"estado"}),
+				  #"Valor reemplazado 3" = Table.ReplaceValue(#"Valor reemplazado 2", "estado desconocido", "no identificado", Replacer.ReplaceText, {"estado"}),
+				  #"Valor reemplazado 4" = Table.ReplaceValue(#"Valor reemplazado 3", "sin estado", "no identificado", Replacer.ReplaceText, {"estado"})
+				in
+				  #"Valor reemplazado 4"
+
+	annotation PBI_ResultType = Table
+
